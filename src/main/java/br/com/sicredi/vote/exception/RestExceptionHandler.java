@@ -5,12 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
-@Order(value = 0)
+//@ControllerAdvice
+//@Order(value = 0)
 public class RestExceptionHandler {
 
-    @ExceptionHandler
-    public ResponseEntity<?> handleException(){
-        return ResponseEntity.unprocessableEntity().body("");
-    }
+//    @ExceptionHandler
+//    public ResponseEntity<?> handleException(){
+//        return ResponseEntity.unprocessableEntity().body("");
+//    }
 }

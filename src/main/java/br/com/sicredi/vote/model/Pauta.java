@@ -8,6 +8,7 @@ import java.util.Calendar;
 public class Pauta {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
 
@@ -17,6 +18,11 @@ public class Pauta {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_sessao")
     private Calendar dataSessao;
+
+    public Pauta(String nome, Calendar dataSessao) {
+        this.nome = nome;
+        this.dataSessao = dataSessao;
+    }
 
     public Pauta(Integer id) {
         this.id = id;
@@ -36,5 +42,13 @@ public class Pauta {
 
     public void setDataSessao(Calendar dataSessao) {
         this.dataSessao = dataSessao;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }
