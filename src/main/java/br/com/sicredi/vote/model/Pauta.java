@@ -35,4 +35,9 @@ public class Pauta {
         this.dataSessao = dataSessao;
     }
 
+    public Pauta(Integer id, String nome, Calendar dataSessao) {
+        this.id = id;
+        this.nome = nome;
+        this.dataSessao = dataSessao;
+    }
 }

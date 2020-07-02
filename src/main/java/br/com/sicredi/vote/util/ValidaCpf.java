@@ -11,9 +11,8 @@ import java.io.IOException;
 
 public class ValidaCpf {
 
-
     static public void validaCpf(String strCpf) throws UsuarioException {
-
+        strCpf = strCpf.replaceAll("\\D+","");
         try {
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpGet request = new HttpGet("https://user-info.herokuapp.com/users/" + strCpf);
