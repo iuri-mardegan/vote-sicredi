@@ -17,10 +17,6 @@ public class Voto {
     private VotoId id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario", insertable = false, updatable = false)
-    private Usuario usuario;
-
-    @ManyToOne
     @JoinColumn(name = "pauta", insertable = false, updatable = false)
     private Pauta pauta;
 

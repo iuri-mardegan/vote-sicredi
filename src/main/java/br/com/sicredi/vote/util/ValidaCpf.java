@@ -1,47 +1,33 @@
 package br.com.sicredi.vote.util;
 
+import br.com.sicredi.vote.exception.UsuarioException;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
 
 public class ValidaCpf {
 
-    static public boolean validaCpf(String strCpf )
-    {
-        int     d1, d2;
-        int     digito1, digito2, resto;
-        int     digitoCPF;
-        String  nDigResult;
 
-        d1 = d2 = 0;
-        digito1 = digito2 = resto = 0;
+    static public void validaCpf(String strCpf) throws UsuarioException {
 
-        for (int nCount = 1; nCount < strCpf.length() -1; nCount++)
-        {
-            digitoCPF = Integer.valueOf (strCpf.substring(nCount -1, nCount)).intValue();
+        try {
+            CloseableHttpClient httpClient = HttpClients.createDefault();
+            HttpGet request = new HttpGet("https://user-info.herokuapp.com/users/" + strCpf);
 
-            d1 = d1 + ( 11 - nCount ) * digitoCPF;
+            CloseableHttpResponse response = null;
+            response = httpClient.execute(request);
 
-            d2 = d2 + ( 12 - nCount ) * digitoCPF;
-        };
-
-        resto = (d1 % 11);
-
-        if (resto < 2)
-            digito1 = 0;
-        else
-            digito1 = 11 - resto;
-
-        d2 += 2 * digito1;
-
-        resto = (d2 % 11);
-
-        if (resto < 2)
-            digito2 = 0;
-        else
-            digito2 = 11 - resto;
-
-        String nDigVerific = strCpf.substring (strCpf.length()-2, strCpf.length());
-
-        nDigResult = String.valueOf(digito1) + String.valueOf(digito2);
-
-        return nDigVerific.equals(nDigResult);
+            if (response.getStatusLine().getStatusCode() != 200) {
+                throw new UsuarioException("Cpf Invalido!");
+            } else if (!EntityUtils.toString(response.getEntity()).contains("ABLE_TO_VOTE")){
+                throw new UsuarioException("Voto não permitido!");
+            }
+        } catch (IOException e) {
+            throw new UsuarioException("Falha no servico de consulta de cpf!");
+        }
     }
 }
