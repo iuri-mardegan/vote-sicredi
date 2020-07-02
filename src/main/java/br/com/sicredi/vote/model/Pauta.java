@@ -2,6 +2,7 @@ package br.com.sicredi.vote.model;
 
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.List;
 
 @Entity
 @Table(name = "pauta")
@@ -18,6 +19,12 @@ public class Pauta {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_sessao")
     private Calendar dataSessao;
+
+    @OneToMany(mappedBy = "pauta")
+    private List<Voto> votos;
+
+    public Pauta() {
+    }
 
     public Pauta(String nome, Calendar dataSessao) {
         this.nome = nome;

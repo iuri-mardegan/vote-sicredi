@@ -1,9 +1,7 @@
 package br.com.sicredi.vote.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario")
@@ -15,6 +13,13 @@ public class Usuario {
 
     @Column(name = "nome")
     private String nome;
+
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Voto> votos;
+
+    public Usuario() {
+    }
 
     public Usuario(String cpf) {
         this.cpf = cpf;
