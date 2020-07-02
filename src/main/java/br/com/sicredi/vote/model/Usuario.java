@@ -1,10 +1,13 @@
 package br.com.sicredi.vote.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "usuario")
+@Data
 public class Usuario {
 
     @Id
@@ -14,30 +17,7 @@ public class Usuario {
     @Column(name = "nome")
     private String nome;
 
-
     @OneToMany(mappedBy = "usuario")
     private List<Voto> votos;
 
-    public Usuario() {
-    }
-
-    public Usuario(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 }

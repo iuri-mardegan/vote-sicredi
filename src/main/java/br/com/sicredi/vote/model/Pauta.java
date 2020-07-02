@@ -1,11 +1,14 @@
 package br.com.sicredi.vote.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.List;
 
 @Entity
 @Table(name = "pauta")
+@Data
 public class Pauta {
 
     @Id
@@ -31,31 +34,4 @@ public class Pauta {
         this.dataSessao = dataSessao;
     }
 
-    public Pauta(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Calendar getDataSessao() {
-        return dataSessao;
-    }
-
-    public void setDataSessao(Calendar dataSessao) {
-        this.dataSessao = dataSessao;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 }

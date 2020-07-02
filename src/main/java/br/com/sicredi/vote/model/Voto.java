@@ -1,9 +1,12 @@
 package br.com.sicredi.vote.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "voto")
+@Data
 public class Voto {
 
     @Id
@@ -25,38 +28,6 @@ public class Voto {
     public Voto(Usuario usuario, Pauta pauta, boolean voto) {
         this.usuario = usuario;
         this.pauta = pauta;
-        this.voto = voto;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Pauta getPauta() {
-        return pauta;
-    }
-
-    public void setPauta(Pauta pauta) {
-        this.pauta = pauta;
-    }
-
-    public boolean isVoto() {
-        return voto;
-    }
-
-    public void setVoto(boolean voto) {
         this.voto = voto;
     }
 }
