@@ -7,6 +7,7 @@ import br.com.sicredi.vote.model.Pauta;
 import br.com.sicredi.vote.service.PautaService;
 import br.com.sicredi.vote.service.VotoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,15 +33,14 @@ public class VoteController {
     public ResponseEntity<?> votosPauta(
             @PathVariable("cpf") String cpf,
             @PathVariable("idPauta") Integer idPauta,
-    @PathVariable("voto") String voto
+            @PathVariable("voto") String voto
     ) throws VoteException, UsuarioException, PautaException {
-        votoService.addVoto(cpf,idPauta,voto);
+        votoService.addVoto(cpf, idPauta, voto);
         return ResponseEntity.ok("Voto adicionado.");
     }
 
-    @GetMapping("/resultado-pauta")
-    public ResponseEntity<?> resultadoPauta() {
-
-        return ResponseEntity.ok("Em Desenvolvimento.");
+    @GetMapping(value = "/resultado-pauta/{idPauta}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> resultadoPauta(@PathVariable("idPauta") Integer idPauta) throws PautaException {
+        return ResponseEntity.ok(votoService.getPauta(idPauta));
     }
 }

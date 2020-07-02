@@ -1,5 +1,6 @@
 package br.com.sicredi.vote.service;
 
+import br.com.sicredi.vote.dto.ResultadoPautaDTO;
 import br.com.sicredi.vote.exception.PautaException;
 import br.com.sicredi.vote.exception.UsuarioException;
 import br.com.sicredi.vote.exception.VoteException;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
+import java.util.List;
 
 @Service
 public class VotoService {
@@ -27,7 +29,7 @@ public class VotoService {
 
     public Voto addVoto(String cpf, Integer idPauta, String voto) throws VoteException, UsuarioException, PautaException {
         Usuario usuario = validaUsuario(cpf);
-        Pauta pauta = validaPauta(idPauta);
+        Pauta pauta = validaPautaVotacao(idPauta);
         return votoRepository.save(new Voto(usuario, pauta, validaVoto(voto)));
     }
 
@@ -50,7 +52,7 @@ public class VotoService {
         }
     }
 
-    private Pauta validaPauta(Integer idPauta) throws PautaException {
+    private Pauta validaPautaVotacao(Integer idPauta) throws PautaException {
         Pauta pauta;
         try {
             pauta = pautaRepository.findById(idPauta).get();
@@ -64,5 +66,20 @@ public class VotoService {
             throw new PautaException("Pauta fora de sessao.");
         }
         return pauta;
+    }
+
+    public ResultadoPautaDTO getPauta(Integer idPauta) throws PautaException {
+        try {
+            Pauta pauta = pautaRepository.findById(idPauta).get();
+            List<Voto> votoList = votoRepository.findByPauta(pauta);
+            return ResultadoPautaDTO.builder()
+                    .idPauta(pauta.getId())
+                    .nomePauta(pauta.getNome())
+                    .votosSim(votoList.stream().filter(Voto::isVoto).count())
+                    .votosNao(votoList.stream().filter(voto -> !voto.isVoto()).count())
+                    .build();
+        } catch (Exception e) {
+            throw new PautaException("Falha ao identificar Pauta");
+        }
     }
 }
