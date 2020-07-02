@@ -13,10 +13,7 @@ import br.com.sicredi.vote.util.ValidaCpf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.Calendar;
-import java.util.Date;
 
 @Service
 public class VotoService {
