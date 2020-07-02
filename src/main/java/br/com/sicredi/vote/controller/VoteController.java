@@ -36,7 +36,7 @@ public class VoteController {
             @PathVariable("voto") String voto
     ) throws VoteException, UsuarioException, PautaException {
         votoService.addVoto(cpf, idPauta, voto);
-        return ResponseEntity.ok("Voto adicionado.");
+        return ResponseEntity.ok("Voto adicionado/atualizado.");
     }
 
     @GetMapping(value = "/resultado-pauta/{idPauta}", produces = MediaType.APPLICATION_JSON_VALUE)

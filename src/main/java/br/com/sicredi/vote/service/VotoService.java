@@ -7,6 +7,7 @@ import br.com.sicredi.vote.exception.VoteException;
 import br.com.sicredi.vote.model.Pauta;
 import br.com.sicredi.vote.model.Usuario;
 import br.com.sicredi.vote.model.Voto;
+import br.com.sicredi.vote.model.VotoId;
 import br.com.sicredi.vote.repository.PautaRepository;
 import br.com.sicredi.vote.repository.UsuarioRepository;
 import br.com.sicredi.vote.repository.VotoRepository;
@@ -30,7 +31,8 @@ public class VotoService {
     public Voto addVoto(String cpf, Integer idPauta, String voto) throws VoteException, UsuarioException, PautaException {
         Usuario usuario = validaUsuario(cpf);
         Pauta pauta = validaPautaVotacao(idPauta);
-        return votoRepository.save(new Voto(usuario, pauta, validaVoto(voto)));
+        VotoId votoId = new VotoId(usuario.getCpf(), pauta.getId());
+        return votoRepository.save(new Voto(votoId, validaVoto(voto)));
     }
 
     private boolean validaVoto(String voto) throws VoteException {

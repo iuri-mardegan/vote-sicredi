@@ -1,36 +1,34 @@
 package br.com.sicredi.vote.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "voto")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Voto {
-
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+    @EmbeddedId
+    private VotoId id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario")
+    @JoinColumn(name = "usuario", insertable = false, updatable = false)
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "pauta")
+    @JoinColumn(name = "pauta", insertable = false, updatable = false)
     private Pauta pauta;
 
     @Column(name = "voto")
     private boolean voto;
 
-    public Voto() {
-    }
-
-    public Voto(Usuario usuario, Pauta pauta, boolean voto) {
-        this.usuario = usuario;
-        this.pauta = pauta;
+    public Voto(VotoId id, boolean voto) {
+        this.id = id;
         this.voto = voto;
     }
 }

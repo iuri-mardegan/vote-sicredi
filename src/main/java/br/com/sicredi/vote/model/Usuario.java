@@ -1,6 +1,8 @@
 package br.com.sicredi.vote.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,6 +10,8 @@ import java.util.List;
 @Entity
 @Table(name = "usuario")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
 
     @Id

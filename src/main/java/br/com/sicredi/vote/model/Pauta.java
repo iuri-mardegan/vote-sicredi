@@ -1,6 +1,8 @@
 package br.com.sicredi.vote.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -9,6 +11,8 @@ import java.util.List;
 @Entity
 @Table(name = "pauta")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Pauta {
 
     @Id
@@ -25,9 +29,6 @@ public class Pauta {
 
     @OneToMany(mappedBy = "pauta")
     private List<Voto> votos;
-
-    public Pauta() {
-    }
 
     public Pauta(String nome, Calendar dataSessao) {
         this.nome = nome;
