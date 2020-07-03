@@ -1,10 +1,10 @@
 # vote-sicredi
 
-Estou trabalhando com Get para poder fazer as chamadas de endpoint direto no navegador
+Estou trabalhando com Get para poder fazer as chamadas de endpoint direto no navegador, outra opção seria adicionar swagger-ui ou utilizar o postman
 
 Cadastro da pauta é aberto no link
 http://localhost:8080/pauta
-O tempo de voto é contado em 1 minuto apartir da data de cadastro da mesma
+O tempo para voto é contado em 1 minuto apartir da data de cadastro da mesma, o id da pauta é apresentado na mensagem de retorno ao criar
 
 Os Votos validos podem ser feitos no link  
 http://localhost:8080/voto/{cpf}/{idPauta}/{voto}
