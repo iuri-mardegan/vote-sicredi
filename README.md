@@ -18,3 +18,5 @@ Para o versionamento dos endpoints, podemos trabalhar organizando no link, algo 
 http://localhost:8080/v1/pauta 
 
 http://localhost:8080/v2/pauta
+
+Quanto ao servico de filas eu não implementei pois foi muito curto o contato que tive, e os servidores sempre ja estavam devidamente configurados, até identifiquei alguns exemplos com docker e fila ibm como no exemplo a seguir (https://github.com/gitzhou/ibm-mq-spring-boot-demo) que poderia implementar juntamente com uma thread para postar a mensagem.
