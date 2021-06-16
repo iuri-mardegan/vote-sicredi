@@ -17,3 +17,15 @@ Para o versionamento dos endpoints, podemos trabalhar organizando no link, algo 
 
 http://localhost:8080/v1/pauta 
 http://localhost:8080/v2/pauta
+
+
+Adicionar query by example
+
+@Repository
+public interface UsuarioDao extends CrudRepository<Usuario, Integer>, QueryByExampleExecutor<Usuario> {
+}
+  
+Uso
+  Usuario usr = new Usuario("nome do usuario");
+  Example<Usuario> usuarioExample = Example.of(usr);
+  usuarioDao.findAll( usuarioExample );
